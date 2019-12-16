@@ -23,3 +23,10 @@ if ($fileShare -eq $null) {
 $password = ConvertTo-SecureString -String $storageAccountKeys[0].Value -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential -ArgumentList "AZURE\$($storageAccount.StorageAccountName)", $password
 New-PSDrive -Name Z -PSProvider FileSystem -Root "\\$($fileShare.StorageUri.PrimaryUri.Host)\$($fileShare.Name)" -Credential $credential -Persist
+
+
+
+
+###############
+Install/Update Azure CLI
+Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'
